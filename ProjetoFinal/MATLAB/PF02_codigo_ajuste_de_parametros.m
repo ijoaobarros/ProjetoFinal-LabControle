@@ -10,7 +10,7 @@ tempo = tempo(1:1114);
 
 % Função de transferência da planta (CubeSat)
 s = tf('s');
-%J = 1    % Momento de inércia inicial
+%J = 1;    % Momento de inércia inicial
 J = 1000/14585;   % Momento de inércia CubeSat
 G = 1/( J * (s^2) );
 
@@ -19,9 +19,9 @@ modelo = step(G, tempo_auxiliar);
 
 % Plotando gráficos
 figure(1);
-plot(tempo, angulo, 'LineWidth', 1.5, 'Color', 'Blue', 'DisplayName','Saída Experimental'); 
+plot(tempo, angulo, 'LineWidth', 1.5, 'Color', 'Blue'); 
 hold on; grid on;
-plot(tempo_auxiliar, modelo, 'LineWidth', 1.5, 'Color', 'Red');
+plot(tempo_auxiliar, modelo, 'LineWidth', 1.5, 'Color', '#C00000');
 title('Saída Experimental x Modelo')
 xlabel('Tempo [s]');
 ylabel('Ângulo [°]');

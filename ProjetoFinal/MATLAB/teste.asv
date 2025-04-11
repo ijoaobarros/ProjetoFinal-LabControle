@@ -1,0 +1,9 @@
+clc; clear;
+
+% Função de transferência da planta (CubeSat)
+s = tf('s');
+J = 1000/14585;   % Momento de inércia CubeSat
+G = 1/( J * (s^2) );
+
+Ts = 0.02;
+G_discreto = c2d(G, Ts, 'zoh');

@@ -1,0 +1,25 @@
+clc; clear;
+
+% Função de transferência da planta (CubeSat)
+s = tf('s');
+J = 1000/14585;   % Momento de inércia CubeSat
+G = 1/( J * (s^2) );
+
+% Plot da resposta em malha fechada para Kp = 1
+K = 1;
+[resposta_mf, tempo] = step(feedback(K*G, 1), 0:1e-3:8);
+figure;
+plot(tempo, resposta_mf, 'LineWidth', 1.5, 'Color', '#C00000');
+title('Resposta em malha fechada para entrada em degrau unitário (Controlador Proporcional).')
+xlabel('Tempo [s]');
+
+% LGR para respostas do sistema em malha fechada
+figure;
+rlocus(G);
+
+% Controlador PD
+figure;
+PD = (4.95466/14.585) * (s+2.600929);
+rlocus(PD*G);
+
+step(feedback(PD*G, 1), 0:1e-3:8);
